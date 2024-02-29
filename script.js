@@ -1,8 +1,10 @@
+'use strict';
+
 const todoForm = document.getElementById('todo-form')
 const mainInput = document.getElementById('input')
 const todoList = document.getElementById('todo-list')
 
-let todos = JSON.parse(localStorage.getItem('todos')) || []
+let todos = JSON.parse(localStorage.getItem('todos')) ?? []
 
 if (localStorage.getItem('todos')) {
     todos.map((todo) => {
@@ -22,7 +24,7 @@ todoForm.addEventListener('submit', function (event) {
 
     const todo = {
         id: new Date().getTime(),
-        name: inputValue,
+        content: inputValue,
     }
 
     todos.push(todo)
@@ -35,23 +37,23 @@ todoForm.addEventListener('submit', function (event) {
 });
 
 function renderTodo (todo) {
-    // Create <li> element and add the id
+    // Create <li> element and add id
     const liEl = document.createElement('li');
     liEl.id = todo.id
 
     // Create a <span> element inside the <li> element
     const todoText = document.createElement('span');
-    todoText.textContent = todo.name;
+    todoText.textContent = todo.content;
     liEl.appendChild(todoText);
 
     // Create a delete button
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
+    deleteButton.textContent = 'delete';
     liEl.appendChild(deleteButton);
 
     // Create an edit button
     const editButton = document.createElement('button');
-    editButton.textContent = 'Edit';
+    editButton.textContent = 'edit';
     liEl.appendChild(editButton);
 
     todoList.appendChild(liEl);
@@ -93,7 +95,7 @@ function updateTodo (todo, newTodo) {
     let todoId = todo.id
     for (const todo of todos) {
         if (todo.id === todoId) {
-            todo.name = newTodo.value
+            todo.content = newTodo.value
         }
     }
     localStorage.setItem('todos', JSON.stringify(todos))
