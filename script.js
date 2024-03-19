@@ -6,6 +6,7 @@ const todoList = document.getElementById('todo-list')
 
 let todos = JSON.parse(localStorage.getItem('todos')) ?? []
 
+// Get todos from local storage
 if (localStorage.getItem('todos')) {
     todos.map((todo) => {
         renderTodo(todo)
@@ -40,6 +41,7 @@ function renderTodo (todo) {
     // Create <li> element and add id
     const liEl = document.createElement('li');
     liEl.id = todo.id
+    liEl.className = 'to-do--li'
 
     // Create a <span> element inside the <li> element
     const todoText = document.createElement('span');
